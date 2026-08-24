@@ -1,6 +1,6 @@
 {
-  "disabled": false,
-  "message": "",
+  "disabled": true,
+  "message": "en maintenance",
   "message_level": "info",
   "min_version": "0.0.0"
 }
