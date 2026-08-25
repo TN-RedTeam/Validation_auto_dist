@@ -36,7 +36,7 @@
 <main>
 <h1>Règles de facturation — ValidationVols</h1>
 <blockquote>
-<p>Résumé lisible des règles appliquées automatiquement par l'outil
+<p>Résumé des règles appliquées automatiquement par l'outil
 (<code>validation_vols</code>). En cas de doute, <strong>le code fait foi</strong>.</p>
 <p>Ces règles sont celles de l'escale actuellement en service. Chaque escale
 aura, à terme, son propre jeu de règles.</p>
@@ -93,13 +93,13 @@ aura, à terme, son propre jeu de règles.</p>
 <h3>Terminal 2</h3>
 <ul>
 <li><strong>AH</strong> — départ, <strong>lundi ou mardi</strong>, type avion ≠ <code>332</code>, heure ≥ <strong>15h30</strong> → <code>0407</code> × 8
-  <em>(AH ne facture jamais le bus passagers <code>6060</code>.)</em></li>
+  <em>(AH ne facture jamais les bus passagers <code>6060</code>.)</em></li>
 <li><strong>LA</strong> — vol <strong>8133</strong> (départ) → <code>0407</code> × <strong>10</strong> ; vol <strong>8132</strong> → <code>0406</code> × 1</li>
 <li><strong>RJ</strong> — vol <strong>118</strong> → <code>0406</code> × 3 ; <strong>+ <code>0407</code> × 3</strong> si type avion <code>321</code></li>
 </ul>
 <h3>Terminal 3 (T)</h3>
 <ul>
-<li>Bus passagers <strong>facturé pour toutes les compagnies</strong>, sauf une liste
+<li>Bus passagers <strong>facturé via la régle de l'appli pour toutes les compagnies</strong>, sauf une liste
   d'exceptions — voir la section <strong>« Terminal 3 »</strong> ci-dessous.</li>
 <li><strong>TO</strong> et <strong>E4</strong> : voir aussi la section <strong>« Vols E4 et TO »</strong>.</li>
 </ul>
@@ -107,14 +107,12 @@ aura, à terme, son propre jeu de règles.</p>
 <h2>Bus passagers (<code>6060</code>) au parking — Terminaux 1 et 2</h2>
 <p>Selon le <strong>parking</strong> (indépendamment de la compagnie, <strong>sauf AH et E4</strong> qui
 n'ont jamais de bus passagers) → <code>6060</code> × 1 :
-- Parking <strong>Q</strong>, <strong>S</strong> ou <strong>R</strong> (Terminal 1 uniquement)
-- Parking <strong>A</strong>/<strong>B</strong>/<strong>C</strong>/<strong>D</strong> à numéro <strong>impair</strong> (ex. <code>B11</code>, <code>A09</code>)
-- Parking <strong>G</strong> (n'importe quel numéro)</p>
+- Parking <strong>Q</strong>, <strong>S</strong>, <strong>G</strong> ou <strong>R</strong> (cies Terminal 1/2 uniquement)
+- Parking <strong>A</strong>/<strong>B</strong>/<strong>C</strong>/<strong>D</strong> à numéro <strong>impair</strong> (ex. <code>B11</code>, <code>A09</code>)</p>
 <hr />
 <h2>Terminal 3 (T)</h2>
-<p>En Terminal 3, le <strong>bus passagers <code>6060</code></strong> est <strong>facturé pour toutes les
-compagnies</strong> (quel que soit le parking), <strong>SAUF</strong> celles ci-dessous, qui ont un
-arrangement propre et ne facturent <strong>aucun bus</strong> (ni <code>6060</code> ni <code>6009</code>) :</p>
+<p>Au Terminal 3, la prestation <strong>bus passagers <code>6060</code></strong> est <strong>facturé (régles de l'appli pour toutes les
+compagnies</strong> (quel que soit le parking), <strong>SAUF</strong> celles ci-dessous :</p>
 <table>
 <thead>
 <tr>
@@ -193,7 +191,7 @@ arrangement propre et ne facturent <strong>aucun bus</strong> (ni <code>6060</co
 </table>
 <blockquote>
 <p>Les compagnies <strong>hors de cette liste</strong> (ex. <strong>TO</strong>) facturent bien le <code>6060</code>
-en Terminal 3.</p>
+au Terminal 3.</p>
 </blockquote>
 <hr />
 <h2>Vols E4 et TO</h2>
@@ -201,10 +199,10 @@ en Terminal 3.</p>
 <ul>
 <li>Arrivée → <code>6060</code> × 1 + <code>6009</code> × 1</li>
 <li>Départ → <code>6009</code> × 1</li>
-<li>En Terminal 3, TO facture aussi le <code>6060</code> (compagnie non exceptée).</li>
+<li>Au Terminal 3, TO facture aussi le <code>6060</code> (compagnie non exceptée).</li>
 </ul>
 <h3>E4 (rotation) — hors Terminal 3</h3>
-<p>Une <strong>rotation courte</strong> = un mouvement de sens opposé du <strong>même avion</strong>
+<p>Une <strong>rotation courte</strong> = un mouvement arv/dpt du <strong>même avion</strong>
 (immatriculation) dans les <strong>90 minutes</strong> (comparé sur l'heure théorique).</p>
 <table>
 <thead>
@@ -216,35 +214,27 @@ en Terminal 3.</p>
 <tbody>
 <tr>
 <td>Arrivée PAX</td>
-<td><code>6060</code> ; <strong>+ <code>6009</code></strong> si l'avion <strong>ne repart pas</strong> (reste la nuit)</td>
+<td><code>6009</code> si l'avion <strong>ne repart pas</strong> (night-stop)</td>
 </tr>
 <tr>
 <td>Arrivée FRY</td>
-<td><code>6009</code> si reste la nuit ; <strong>rien</strong> si rotation courte</td>
+<td><code>6009</code> si night-stop ; <strong>rien</strong> si rotation courte</td>
 </tr>
 <tr>
 <td>Départ PAX</td>
-<td><code>6060</code> <strong>+ <code>6009</code></strong> si l'avion était là <strong>depuis la veille</strong></td>
+<td><code>6009</code> si l'avion était là <strong>depuis la veille</strong></td>
 </tr>
 <tr>
 <td>Départ FRY</td>
 <td><code>6009</code> si était là depuis la veille</td>
 </tr>
-<tr>
-<td>Rotation courte (départ)</td>
-<td><strong>rien</strong> (déjà couvert par l'arrivée)</td>
-</tr>
 </tbody>
 </table>
-<blockquote>
-<p>Le <code>6060</code> (bus passagers) est ensuite <strong>retiré</strong> pour les E4 → <strong>hors T3, un
-E4 ne facture que le <code>6009</code></strong> (bus équipage). <strong>En Terminal 3, E4 ne facture
-aucun bus</strong> (facturation automatique).</p>
-</blockquote>
+<p>pour les E4 → <strong>hors T3, un
+on ne facture que le <code>6009</code></strong> (bus équipage).</p>
 <hr />
 <h2>Prestations manuelles (hors règles)</h2>
-<p><code>0402</code> (Escort service) et <code>0408</code> (Traitement des mineurs non accompagnés)
-n'ont <strong>aucune règle automatique</strong> : elles se posent <strong>manuellement</strong> (cocher
+<p>Elles se posent <strong>manuellement</strong> (cocher
 les vols → choisir le code → saisir la quantité → <em>Appliquer</em>).</p>
 <p>Le filtre <strong>« Afficher »</strong> permet de distinguer :
 - <strong>Facturation par règle</strong> : produite automatiquement par les règles ci-dessus.
