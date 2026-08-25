@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guide utilisateur — ValidationVols</title>
+
+<style>
+  :root { color-scheme: light; }
+  body {
+    font-family: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+    line-height: 1.55; color: #1F2937; background: #F4F6F9; margin: 0;
+  }
+  main {
+    max-width: 900px; margin: 24px auto; background: #fff; padding: 32px 40px;
+    border: 1px solid #E5E7EB; border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.06);
+  }
+  h1 { color: #1E3A8A; border-bottom: 3px solid #2563EB; padding-bottom: 8px; }
+  h2 { color: #1E40AF; margin-top: 28px; }
+  h3 { color: #374151; }
+  code { background: #EEF2F7; padding: 1px 5px; border-radius: 4px;
+         font-family: Consolas, "Courier New", monospace; font-size: .92em; }
+  table { border-collapse: collapse; width: 100%; margin: 12px 0; }
+  th, td { border: 1px solid #D1D5DB; padding: 7px 10px; text-align: left; }
+  th { background: #EEF2F7; }
+  tr:nth-child(even) td { background: #FAFBFC; }
+  blockquote { border-left: 4px solid #93C5FD; background: #EFF6FF;
+    margin: 12px 0; padding: 8px 14px; color: #1E3A8A; border-radius: 0 6px 6px 0; }
+  hr { border: none; border-top: 1px solid #E5E7EB; margin: 24px 0; }
+  .pied { text-align: center; color: #6B7280; font-size: .85em; margin-top: 28px; }
+</style>
+
+</head>
+<body>
+<main>
+<h1>Guide utilisateur — ValidationVols</h1>
+<p>Application pour <strong>valider en masse les vols dans RESA</strong> et poser leur
+facturation, au lieu de traiter chaque vol un par un.</p>
+<blockquote>
+<p>⚠️ L'application doit tourner sur un poste <strong>connecté au réseau interne / VPN</strong>
+(le serveur RESA n'est joignable que de là).</p>
+</blockquote>
+<hr />
+<h2>1. Installation</h2>
+<p>Il n'y a <strong>rien à installer</strong> de compliqué : un seul fichier <code>ValidationVols.exe</code>.</p>
+<ol>
+<li>Récupérez <strong><code>ValidationVols.exe</code></strong> (lien fourni par votre administrateur).</li>
+<li><strong>Double-cliquez</strong> dessus.</li>
+<li>Au premier lancement, l'application <strong>s'installe automatiquement</strong> sur votre
+   profil et crée un <strong>raccourci</strong> (menu Démarrer, et Bureau si possible).</li>
+<li>Ensuite, lancez-la simplement par ce <strong>raccourci</strong>.</li>
+</ol>
+<blockquote>
+<p><strong>Mises à jour automatiques</strong> : à chaque lancement, l'application vérifie s'il
+existe une nouvelle version et se met à jour toute seule. Vous n'avez rien à
+faire. Un message « Mise à jour effectuée » peut s'afficher au redémarrage.</p>
+</blockquote>
+<hr />
+<h2>2. Se connecter</h2>
+<ol>
+<li>Saisissez votre <strong>Identifiant</strong> et votre <strong>Mot de passe</strong> RESA.</li>
+<li>Cliquez <strong>Se connecter</strong> (ou <strong>Tester</strong> pour vérifier la connexion).</li>
+</ol>
+<blockquote>
+<p>🔒 Le <strong>mot de passe n'est jamais enregistré</strong> : il est demandé à chaque
+session, aucune trace sur le disque.</p>
+</blockquote>
+<hr />
+<h2>3. Charger les vols</h2>
+<ul>
+<li>Renseignez éventuellement <strong>Terminal</strong> (ex. <code>1,T</code>) et <strong>Date</strong> (ex. <code>03/07</code>),
+  puis cliquez <strong>⟳ Charger</strong>.</li>
+<li>Vous ne voyez que les vols de <strong>votre escale</strong> (selon votre identifiant).</li>
+</ul>
+<hr />
+<h2>4. Le tableau des vols</h2>
+<ul>
+<li><strong>Case à cocher</strong> (1ʳᵉ colonne) : cliquez pour <strong>sélectionner</strong> un vol.
+  Les boutons « Tout cocher / décocher » agissent sur les vols affichés.</li>
+<li><strong>Colonnes</strong> : Vol, Sens (A/D), MVT (PAX/FRY), Date, HT, HR, Terminal,
+  Parking, Immat, Avion, État, <strong>Facturation</strong>, <strong>Commentaire</strong>.</li>
+<li><strong>Trier par heure</strong> : cliquez sur l'en-tête <strong>HT</strong> ou <strong>HR</strong> (1er clic
+  croissant, 2ᵉ décroissant).</li>
+<li><strong>Filtrer une colonne</strong> (style Excel) : cliquez sur l'en-tête d'une colonne
+  → cochez les valeurs à garder.</li>
+<li><strong>Filtre « Afficher »</strong> (menu déroulant) : Tous, Validés, Non-validés,
+  Facturés, Non-facturés, <strong>Facturation manuelle</strong>, <strong>Facturation par règle</strong>.</li>
+<li><strong>Recherche</strong> : tapez du texte pour filtrer (compagnie, vol, immat…).</li>
+<li><strong>Commentaire</strong> : <strong>double-cliquez</strong> sur la cellule Commentaire pour saisir
+  une note (ex. justification d'une facturation). Elle est envoyée à RESA lors
+  de la validation ou de l'enregistrement.</li>
+</ul>
+<hr />
+<h2>5. La facturation</h2>
+<ul>
+<li>La colonne <strong>Facturation</strong> affiche ce qui sera posé automatiquement (règles).</li>
+<li><strong>Poser une facturation manuelle</strong> (hors règles) :
+  1. <strong>Cochez</strong> les vols concernés.
+  2. Choisissez le <strong>code</strong> de prestation dans la liste.
+  3. Saisissez la <strong>quantité</strong>.
+  4. Cliquez <strong>Appliquer</strong> (ou <strong>Effacer</strong> pour retirer).</li>
+</ul>
+<hr />
+<h2>6. Valider</h2>
+<ul>
+<li>Cochez les vols, puis :</li>
+<li><strong>✅ Valider la sélection</strong> : pose la facturation <strong>et</strong> valide les vols.</li>
+<li><strong>💾 Enregistrer (sans valider)</strong> : pose la facturation et le commentaire
+    <strong>sans</strong> valider (le vol reste à valider plus tard, ex. au départ).</li>
+<li><strong>Dévalider la sélection</strong> : annule la validation de vols déjà validés.</li>
+<li>Le <strong>Journal</strong> en bas affiche l'avancement (succès / erreurs) vol par vol.</li>
+<li>Le bouton <strong>Stop</strong> interrompt un traitement en cours.</li>
+</ul>
+<hr />
+<h2>7. Messages de l'administrateur</h2>
+<p>L'application peut afficher un <strong>bandeau d'information</strong> (ex. « maintenance »)
+ou, en cas de besoin, être <strong>temporairement désactivée</strong> à distance par
+l'administrateur. Dans ce cas, un message vous l'indique.</p>
+<hr />
+<h2>8. En cas de souci</h2>
+<ul>
+<li><strong>« Non connecté »</strong> : vérifiez identifiant/mot de passe et que vous êtes bien
+  sur le réseau interne / VPN.</li>
+<li><strong>Aucun vol</strong> : vérifiez le terminal / la date, puis rechargez.</li>
+<li><strong>Autre blocage</strong> : contactez votre administrateur (<strong>Karim ROMDHANE</strong>).</li>
+</ul>
+<hr />
+<p><em>Application développée par Karim ROMDHANE.</em></p>
+<p class="pied">Document généré automatiquement — ValidationVols (Karim ROMDHANE).</p>
+</main>
+</body>
+</html>

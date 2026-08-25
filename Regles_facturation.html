@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Règles de facturation — ValidationVols</title>
+
+<style>
+  :root { color-scheme: light; }
+  body {
+    font-family: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+    line-height: 1.55; color: #1F2937; background: #F4F6F9; margin: 0;
+  }
+  main {
+    max-width: 900px; margin: 24px auto; background: #fff; padding: 32px 40px;
+    border: 1px solid #E5E7EB; border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.06);
+  }
+  h1 { color: #1E3A8A; border-bottom: 3px solid #2563EB; padding-bottom: 8px; }
+  h2 { color: #1E40AF; margin-top: 28px; }
+  h3 { color: #374151; }
+  code { background: #EEF2F7; padding: 1px 5px; border-radius: 4px;
+         font-family: Consolas, "Courier New", monospace; font-size: .92em; }
+  table { border-collapse: collapse; width: 100%; margin: 12px 0; }
+  th, td { border: 1px solid #D1D5DB; padding: 7px 10px; text-align: left; }
+  th { background: #EEF2F7; }
+  tr:nth-child(even) td { background: #FAFBFC; }
+  blockquote { border-left: 4px solid #93C5FD; background: #EFF6FF;
+    margin: 12px 0; padding: 8px 14px; color: #1E3A8A; border-radius: 0 6px 6px 0; }
+  hr { border: none; border-top: 1px solid #E5E7EB; margin: 24px 0; }
+  .pied { text-align: center; color: #6B7280; font-size: .85em; margin-top: 28px; }
+</style>
+
+</head>
+<body>
+<main>
+<h1>Règles de facturation — ValidationVols</h1>
+<blockquote>
+<p>Résumé lisible des règles appliquées automatiquement par l'outil
+(<code>validation_vols</code>). En cas de doute, <strong>le code fait foi</strong>.</p>
+<p>Ces règles sont celles de l'escale actuellement en service. Chaque escale
+aura, à terme, son propre jeu de règles.</p>
+</blockquote>
+<h2>Codes prestation</h2>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Libellé</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>0402</code></td>
+<td>Escort service</td>
+<td>manuel</td>
+</tr>
+<tr>
+<td><code>0406</code></td>
+<td>Mise à dispo. agent commercial en gare (agent/heure)</td>
+<td>règle + manuel</td>
+</tr>
+<tr>
+<td><code>0407</code></td>
+<td>Mise à dispo. d'un agent d'enregistrement (agent/heure)</td>
+<td>règle + manuel</td>
+</tr>
+<tr>
+<td><code>0408</code></td>
+<td>Traitement des mineurs non accompagnés (nombre de mineurs)</td>
+<td>manuel</td>
+</tr>
+<tr>
+<td><code>6009</code></td>
+<td>Transport équipage avion / aérogare (<strong>bus équipage</strong>)</td>
+<td>règle</td>
+</tr>
+<tr>
+<td><code>6060</code></td>
+<td>Emb./débarquement des passagers par bus (<strong>bus passagers</strong>)</td>
+<td>règle</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Règle globale :</strong> un vol <strong>annulé</strong> ne facture <strong>rien</strong>.</p>
+<hr />
+<h2>Règles par compagnie (classées par terminal)</h2>
+<h3>Terminal 1</h3>
+<ul>
+<li><strong>EI</strong> — départ <strong>et</strong> parking <code>U03</code> → <code>0406</code> × 2</li>
+</ul>
+<h3>Terminal 2</h3>
+<ul>
+<li><strong>AH</strong> — départ, <strong>lundi ou mardi</strong>, type avion ≠ <code>332</code>, heure ≥ <strong>15h30</strong> → <code>0407</code> × 8
+  <em>(AH ne facture jamais le bus passagers <code>6060</code>.)</em></li>
+<li><strong>LA</strong> — vol <strong>8133</strong> (départ) → <code>0407</code> × <strong>10</strong> ; vol <strong>8132</strong> → <code>0406</code> × 1</li>
+<li><strong>RJ</strong> — vol <strong>118</strong> → <code>0406</code> × 3 ; <strong>+ <code>0407</code> × 3</strong> si type avion <code>321</code></li>
+</ul>
+<h3>Terminal 3 (T)</h3>
+<ul>
+<li>Bus passagers <strong>facturé pour toutes les compagnies</strong>, sauf une liste
+  d'exceptions — voir la section <strong>« Terminal 3 »</strong> ci-dessous.</li>
+<li><strong>TO</strong> et <strong>E4</strong> : voir aussi la section <strong>« Vols E4 et TO »</strong>.</li>
+</ul>
+<hr />
+<h2>Bus passagers (<code>6060</code>) au parking — Terminaux 1 et 2</h2>
+<p>Selon le <strong>parking</strong> (indépendamment de la compagnie, <strong>sauf AH et E4</strong> qui
+n'ont jamais de bus passagers) → <code>6060</code> × 1 :
+- Parking <strong>Q</strong>, <strong>S</strong> ou <strong>R</strong> (Terminal 1 uniquement)
+- Parking <strong>A</strong>/<strong>B</strong>/<strong>C</strong>/<strong>D</strong> à numéro <strong>impair</strong> (ex. <code>B11</code>, <code>A09</code>)
+- Parking <strong>G</strong> (n'importe quel numéro)</p>
+<hr />
+<h2>Terminal 3 (T)</h2>
+<p>En Terminal 3, le <strong>bus passagers <code>6060</code></strong> est <strong>facturé pour toutes les
+compagnies</strong> (quel que soit le parking), <strong>SAUF</strong> celles ci-dessous, qui ont un
+arrangement propre et ne facturent <strong>aucun bus</strong> (ni <code>6060</code> ni <code>6009</code>) :</p>
+<table>
+<thead>
+<tr>
+<th>IATA</th>
+<th>ICAO</th>
+<th>Raison</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BJ</td>
+<td>LBT</td>
+<td>bus en direct</td>
+</tr>
+<tr>
+<td>DE</td>
+<td>CFG</td>
+<td>bus en direct</td>
+</tr>
+<tr>
+<td>FH</td>
+<td>FHM</td>
+<td>facturation automatique</td>
+</tr>
+<tr>
+<td>IZ</td>
+<td>AIZ</td>
+<td>bus en direct</td>
+</tr>
+<tr>
+<td>LS</td>
+<td>EXS</td>
+<td>pas de tarif (en direct)</td>
+</tr>
+<tr>
+<td>NE</td>
+<td>NMA</td>
+<td>plus en forfait</td>
+</tr>
+<tr>
+<td>NP</td>
+<td>NIA</td>
+<td>facturation automatique</td>
+</tr>
+<tr>
+<td>PG</td>
+<td>PGT</td>
+<td>bus en direct (Flybus)</td>
+</tr>
+<tr>
+<td>E4</td>
+<td>ENT</td>
+<td>facturation automatique</td>
+</tr>
+<tr>
+<td>BOL</td>
+<td>CTM</td>
+<td>facturation automatique</td>
+</tr>
+<tr>
+<td>SM</td>
+<td>MSC</td>
+<td>facturation automatique</td>
+</tr>
+<tr>
+<td>TS</td>
+<td>TSC</td>
+<td>bus pas au contrat</td>
+</tr>
+<tr>
+<td>TU</td>
+<td>TAR</td>
+<td>facturation automatique</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Les compagnies <strong>hors de cette liste</strong> (ex. <strong>TO</strong>) facturent bien le <code>6060</code>
+en Terminal 3.</p>
+</blockquote>
+<hr />
+<h2>Vols E4 et TO</h2>
+<h3>TO</h3>
+<ul>
+<li>Arrivée → <code>6060</code> × 1 + <code>6009</code> × 1</li>
+<li>Départ → <code>6009</code> × 1</li>
+<li>En Terminal 3, TO facture aussi le <code>6060</code> (compagnie non exceptée).</li>
+</ul>
+<h3>E4 (rotation) — hors Terminal 3</h3>
+<p>Une <strong>rotation courte</strong> = un mouvement de sens opposé du <strong>même avion</strong>
+(immatriculation) dans les <strong>90 minutes</strong> (comparé sur l'heure théorique).</p>
+<table>
+<thead>
+<tr>
+<th>Mouvement</th>
+<th>Facturation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Arrivée PAX</td>
+<td><code>6060</code> ; <strong>+ <code>6009</code></strong> si l'avion <strong>ne repart pas</strong> (reste la nuit)</td>
+</tr>
+<tr>
+<td>Arrivée FRY</td>
+<td><code>6009</code> si reste la nuit ; <strong>rien</strong> si rotation courte</td>
+</tr>
+<tr>
+<td>Départ PAX</td>
+<td><code>6060</code> <strong>+ <code>6009</code></strong> si l'avion était là <strong>depuis la veille</strong></td>
+</tr>
+<tr>
+<td>Départ FRY</td>
+<td><code>6009</code> si était là depuis la veille</td>
+</tr>
+<tr>
+<td>Rotation courte (départ)</td>
+<td><strong>rien</strong> (déjà couvert par l'arrivée)</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Le <code>6060</code> (bus passagers) est ensuite <strong>retiré</strong> pour les E4 → <strong>hors T3, un
+E4 ne facture que le <code>6009</code></strong> (bus équipage). <strong>En Terminal 3, E4 ne facture
+aucun bus</strong> (facturation automatique).</p>
+</blockquote>
+<hr />
+<h2>Prestations manuelles (hors règles)</h2>
+<p><code>0402</code> (Escort service) et <code>0408</code> (Traitement des mineurs non accompagnés)
+n'ont <strong>aucune règle automatique</strong> : elles se posent <strong>manuellement</strong> (cocher
+les vols → choisir le code → saisir la quantité → <em>Appliquer</em>).</p>
+<p>Le filtre <strong>« Afficher »</strong> permet de distinguer :
+- <strong>Facturation par règle</strong> : produite automatiquement par les règles ci-dessus.
+- <strong>Facturation manuelle</strong> : saisie à la main (hors règles).</p>
+<p class="pied">Document généré automatiquement — ValidationVols (Karim ROMDHANE).</p>
+</main>
+</body>
+</html>
