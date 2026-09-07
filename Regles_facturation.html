@@ -240,9 +240,36 @@ terminal — y compris en Terminal 3</strong>.</p>
 <h2>Prestations manuelles (hors règles)</h2>
 <p>Elles se posent <strong>manuellement</strong> (cocher
 les vols → choisir le code → saisir la quantité → <em>Appliquer</em>).</p>
+<p>La quantité accepte les <strong>décimales à la virgule</strong> (ex. <code>2,5</code>, <code>5,25</code>) : les
+flèches avancent par quart (<code>0,25</code>).</p>
 <p>Le filtre <strong>« Afficher »</strong> permet de distinguer :
 - <strong>Facturation par règle</strong> : produite automatiquement par les règles ci-dessus.
 - <strong>Facturation manuelle</strong> : saisie à la main (hors règles).</p>
+<h3>Prestations horaires au quart d'heure (vols TK)</h3>
+<p>Pour aligner la facturation sur le contrat, les prestations d'agents (ex.
+<code>0406</code>/<code>0407</code>) se saisissent <strong>au quart d'heure</strong> : <code>0,25</code> – <code>0,50</code> – <code>0,75</code> –
+<code>1,00</code> par heure entamée.</p>
+<table>
+<thead>
+<tr>
+<th>Durée</th>
+<th>Arrondi</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01h10</td>
+<td>01,25</td>
+</tr>
+<tr>
+<td>01h40</td>
+<td>01,75</td>
+</tr>
+</tbody>
+</table>
+<p>La quantité à saisir = <strong>arrondi × nombre d'agents</strong> :
+- 2 agents pour 01h10 → <code>01,25 × 2</code> = <strong><code>2,5</code></strong>
+- 3 agents pour 01h40 → <code>01,75 × 3</code> = <strong><code>5,25</code></strong></p>
 <p class="pied">Document généré automatiquement — ValidationVols (Karim ROMDHANE).</p>
 </main>
 </body>
